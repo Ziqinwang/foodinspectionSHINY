@@ -20,6 +20,30 @@ shinyServer(function(input, output,session) {
     })
   })
   
+  observe({
+    input$date1
+    
+    updateDateRangeInput(session, "date2",
+                         "Select dates to visualize.",
+                         start = input$date1[1],
+                         end = input$date1[2],
+                         min = min(food$FoodDate), max = max(food$FoodDate))
+  })
+  
+  observe({
+    input$date2
+    
+    updateDateRangeInput(session, "date1",
+                         "Select dates to visualize.",
+                         start = input$date2[1],
+                         end = input$date2[2],
+                         min = min(food$FoodDate), max = max(food$FoodDate))
+  })
+  
+  
+  
+  
+  
   output$mymap <- renderLeaflet({
     filtered_food() %>%
       leaflet() %>% 
